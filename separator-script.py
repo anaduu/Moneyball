@@ -10,6 +10,8 @@ with open('data1.csv', newline='') as source:
         gk_writer = csv.writer(goalkeepers_file)
         with open("players.csv", "w") as players_file:
             pl_writer = csv.writer(players_file)
+            gk_index = 0
+            pl_index = 0
 
             position_column = -1
             for r in reader:
@@ -18,8 +20,15 @@ with open('data1.csv', newline='') as source:
                         position_column = i
 
             source.seek(0)
+            header = next(reader)
+            gk_writer.writerow(header)
+            pl_writer.writerow(header)
             for r in reader:
                 if r[position_column] == "GK":
+                    r[0] = gk_index
                     gk_writer.writerow(r)
+                    gk_index += 1
                 else:
+                    r[0] = pl_index
                     pl_writer.writerow(r)
+                    pl_index += 1
