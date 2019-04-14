@@ -6,9 +6,9 @@ with open('data1.csv', newline='') as source:
     reader = csv.reader(source, dialect)
     number_of_columns = len(next(reader))
     source.seek(0)
-    with open("goalkeepers.csv", "w") as goalkeepers_file:
+    with open("data/goalkeepers.csv", "w") as goalkeepers_file:
         gk_writer = csv.writer(goalkeepers_file)
-        with open("players.csv", "w") as players_file:
+        with open("data/players.csv", "w") as players_file:
             pl_writer = csv.writer(players_file)
             gk_index = 0
             pl_index = 0
@@ -32,3 +32,4 @@ with open('data1.csv', newline='') as source:
                     r[0] = pl_index
                     pl_writer.writerow(r)
                     pl_index += 1
+
