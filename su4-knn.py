@@ -90,18 +90,21 @@ k=0
 broj = int(input())
 print("Ime igarača je:", K[broj][58])
 print("Njegov overall je", K[broj][57])
-print("Njegova pozicija je", K[broj][59])
 for i in range(0,5000):
     if(K[i][59] == "GK"): K[i][59]="G"
     if(K[i][59] == "CB") or (K[i][59] == "LCB") or (K[i][59] == "RCB") or (K[i][59] == "LB") or (K[i][59] == "RB") or (K[i][59] == "LWB") or (K[i][59] == "RWB") : K[i][59]="B"
     if(K[i][59] == "CM") or (K[i][59] == "LDM") or (K[i][59] == "LAM") or (K[i][59] == "RDM") or (K[i][59] == "RAM") or (K[i][59]=="CDM") or(K[i][59]=="CAM") or(K[i][59]=="LM")or(K[i][59]=="RM") or (K[i][59] == "RCM") or (K[i][59] == "LCM") : K[i][59]="V"
 if(K[i][59] == "ST") or (K[i][59] == "CF") or (K[i][59] == "LW") or (K[i][59] == "RW") or (K[i][59] == "LF") or (K[i][59] == "RF") or (K[i][59] == "LS") or (K[i][59] == "RS") : K[i][59]="N"
 polje = [];
+print("Njegova pozicija je", K[broj][59])
+
 if(K[broj][59]=="G"): exit(-1);
-for i in range(0,2000):
+for i in range(0,5000):
     sol1=udaljenost(i,broj)
     if(sol1==0): sol1=99999
-    if(K[i][59]==K[broj][59]): polje.append(par(sol1,i))    
+    polje.append(par(sol1,i))    
+ 
+# if(K[i][59]==K[broj][59]):   
     polje.sort()
 a=0
 b=0
