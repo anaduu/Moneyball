@@ -35,6 +35,8 @@ set <string>::iterator si;
 printf("U setu se nalazi:\n");
 double rezultat;
 int imam_ukupno=0;
+ofstream novifile;
+novifile.open("dr1.csv");
 for(si=s.begin();si!=s.end();++si)
 {
  	if(mapa1[*si]>20) {
@@ -42,10 +44,12 @@ for(si=s.begin();si!=s.end();++si)
 				cout << *si <<" "<<mapa1[*si]<<" " <<mapa2[*si];
 				printf(" %lf\n",rezultat);
 				++imam_ukupno;
+				novifile << *si<< ","<< rezultat << endl;	
 			  }
 }
 //printf("Duljina seta je: %d\n",s.size());
 printf("Na kraju imam ukupno %d država\n",imam_ukupno);
+
 return 0;
 }
 
