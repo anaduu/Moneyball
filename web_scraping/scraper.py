@@ -55,10 +55,16 @@ r=csv.reader(open('dr1.csv'))
 lines=list(r)
 K = data1.values
 print("Duljina od K je--------------------------------------------------------- ")
+print(rows[0][2])
+print(lines[71][2])
 print(n_row)
-for i in range(1,72):
+for i in range(0,72):
+    print("Usao sam...")
     for j in range(0,210):
-       # print(K[i][1])
+        #print("Usao sam1")
+        print(lines[i][0])
+        #print(rows[j][2])
+        #print("Prije prvog ifa")
         if(lines[i][0]==rows[j][1]):
             lines[i][2]=rows[j][2]
             print(rows[j][1])
