@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup    # PyPI name: beautifulsoup4
 import pandas as pd
-
+import csv
 url = 'http://web.studenti.math.pmf.unizg.hr/~silovro/strojno'
 
 #r = requests.get(url)
@@ -39,10 +39,33 @@ df = pd.DataFrame(rows, columns=column_names)
 
 pd.set_option('display.max_columns', n_col)
 pd.set_option('display.width', 200)
-print(df)
-print(df[2:4])
+#print(df)
+#print(df[2:4])
 print(rows[0][1])
-
+print(rows[0][2])
+print(rows[1][1])
+print("Tu samo sada ")
+DATA_LOCATION = "dr1.csv"
+FIRST_ATTRIBUTE = "drzava"
+SECOND_ATTRIBUTE = "overall"
+treci="koef"
+datas = pd.read_csv(DATA_LOCATION)
+data1 = datas[[FIRST_ATTRIBUTE, SECOND_ATTRIBUTE, treci]]
+r=csv.reader(open('dr1.csv'))
+lines=list(r)
+K = data1.values
+print("Duljina od K je--------------------------------------------------------- ")
+print(n_row)
+for i in range(1,72):
+    for j in range(0,210):
+       # print(K[i][1])
+        if(lines[i][0]==rows[j][1]):
+            lines[i][2]=rows[j][2]
+            print(rows[j][1])
+            print(lines[i][0])
+            print(rows[j][2])
+            print("Kraj....")
 #print(df[0])
 #print(df[1])
-
+writer=csv.writer(open('dr1.csv','w'))
+writer.writerows(lines)
