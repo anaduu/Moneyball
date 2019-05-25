@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math 
+import csv
 class par:
     def __init__(self,x,y):
         self.x=x
@@ -13,12 +14,15 @@ class par:
             return self.x < other.x
 def udaljenost(a,b):
                     sol=0
-                    for i in range(0,26):
+                    for i in range(0,27):
                         sol=sol+((K[b][i]-K[a][i])**2)
+                        #print(K[b][i])
+                        #print(K[a][i])
+                        #print(sol)
                     return sol**(1/float(2))
 
 
-DATA_LOCATION = "data1.csv"
+DATA_LOCATION = "data/main_players.csv"
 FIRST_ATTRIBUTE = "LS"
 SECOND_ATTRIBUTE = "ST"
 treci="RS"
@@ -56,42 +60,68 @@ K = data1.values
 min=9999999
 sol1=0
 k=0
-broj = int(input())
-print(K[broj][28])
-for i in range(0,5000):
+sol3=0
+postotak=0;
+niz=[]
+#print(udaljenost(0,1))
+#print(K[broj][28])
+for i in range(0,3000):
     if(K[i][27] == "GK"): K[i][27]="G"
     if(K[i][27] == "CB") or (K[i][27] == "LCB") or (K[i][27] == "RCB") or (K[i][27] == "LB") or (K[i][27] == "RB") or (K[i][27] == "LWB") or (K[i][27] == "RWB") : K[i][27]="B"
     if(K[i][27] == "CM") or (K[i][27] == "LDM") or (K[i][27] == "LAM") or (K[i][27] == "RDM") or (K[i][27] == "RAM") or (K[i][27]=="CDM") or(K[i][27]=="CAM") or(K[i][27]=="LM")or(K[i][27]=="RM") or (K[i][27] == "RCM") or (K[i][27] == "LCM") : K[i][27]="V"
     if(K[i][27] == "ST") or (K[i][27] == "CF") or (K[i][27] == "LW") or (K[i][27] == "RW") or (K[i][27] == "LF") or (K[i][27] == "RF") or (K[i][27] == "LS") or (K[i][27] == "RS") : K[i][27]="N"
-polje = [];    
-for i in range(0,5000):
-    sol1=udaljenost(i,broj)
-    if(sol1==0): sol1=999999
-    if(K[i][27]!="G" and K[i][27]!="B" and K[i][27]!="V" and K[i][27]!="N"): print(K[i][27]);
-    polje.append(par(sol1,i))    
-    polje.sort()
-print(polje[0].x, polje[0].y)
-print(K[broj][27])    
-print(K[polje[0].y])
-a=0
-b=0
-c=0
-d=0
-for i in range(1,5):            
-            if(K[polje[0].y][27]=="N"): a=a+1    
-            if(K[polje[0].y][27]=="V"): b=b+1    
-            if(K[polje[0].y][27]=="B"): c=c+1  
-            if(K[polje[0].y][27]=="G"): d=d+1  
-                          
-print(a,b,c)
-if(d>0): print("G i gotovo")
-if(a>b and a>c): 
-                        print("N")
-                        print(K[broj][27])  
-if(b>c and b>a): 
-                        print("V")
-                        print(K[broj][27]);
-if(c>a and c>b): 
-                        print("B")
-                        print(K[broj][27]);
 
+#print("Prije for petlje")   
+for broj in range(0,2000):
+        polje = [];         
+        for i in range(0,2500):
+            sol1=udaljenost(i,broj)
+            if(sol1==0): sol1=999999
+            if(K[i][27]!="G" and K[i][27]!="B" and K[i][27]!="V" and K[i][27]!="N"): print(K[i][27]);
+            polje.append(par(sol1,i))    
+            polje.sort()
+        #print(polje[0].x, polje[0].y)
+        #print(K[broj][27])    
+        #print(K[polje[0].y])
+        a=0
+        b=0
+        c=0
+        d=0
+        e=0
+        for i in range(1,10):            
+                    if(K[polje[i].y][27]=="N"): a=a+1    
+                    if(K[polje[i].y][27]=="V"): b=b+1    
+                    if(K[polje[i].y][27]=="B"): c=c+1  
+                    if(K[polje[i].y][27]=="G"): d=d+1  
+                                  
+        print(a,b,c)
+        if(d>0): print("G i gotovo")
+        if(a>b and a>c): 
+                                #print("N")
+                                if(K[broj][27]=="N"):
+                                                      sol3=sol3+1
+                                                      postotak=sol3/(broj+1)
+                                                      print("{:.6f}".format(postotak))      
+                                                           
+        if(b>c and b>a): 
+                                print("V")
+                                if(K[broj][27]=="V"):
+                                                      sol3=sol3+1
+                                                      postotak=sol3/(broj+1)
+                                                      print("{:.6f}".format(postotak))  
+        if(c>a and c>b): 
+                                print("B")
+                                if(K[broj][27]=="B"):
+                                                      sol3=sol3+1
+                                                      postotak=sol3/(broj+1)  
+                                                      print("{:.6f}".format(postotak))
+        print("Trenutačno obradio broj:", broj, ".")
+        niz.append(postotak)
+print("{:.6f}".format(postotak))
+print("{:.6f}".format(niz[8]))
+with open('mojcsv.csv', 'w', newline='') as file:
+    writer = csv.writer(file,delimiter=',')
+    writer.writerow(['broj','postotak'])
+    for i in range (1,2000):
+        writer.writerow([str(i+1),str(niz[i])])    
+        
