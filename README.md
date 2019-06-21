@@ -1,3 +1,3 @@
 # Moneyball
 <hr>
-Ana Dugandžić, Ivan Zvonimir Kos, Lucija Marinčić, Lovro Sindičić
+Ana Dugandžić, Lucija Marinčić, Lovro Sindičić
